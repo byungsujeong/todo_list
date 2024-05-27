@@ -11,31 +11,13 @@ from database.orm import ToDo
 from schema.response import ToDoListSchema, ToDoSchema
 from schema.request import CreateToDoRequest
 
+
 app = FastAPI()
 
 
 @app.get("/")
 def health_check_handler():
     return {"ping": "pong"}
-
-
-todo_data = {
-    1: {
-        "id": 1,
-        "contents": "Fast API1",
-        "is_done": True
-    },
-    2: {
-        "id": 2,
-        "contents": "Fast API2",
-        "is_done": False
-    },
-    3: {
-        "id": 3,
-        "contents": "Fast API3",
-        "is_done": False
-    }
-}
 
 
 @app.get("/todos", status_code=200)
@@ -94,7 +76,7 @@ def update_todo_handler(
     raise HTTPException(status_code=404, detail="ToDo Not Found")
 
 
-@app.delete("/todo/{todo_id}", status_code=204)
+@app.delete("/todos/{todo_id}", status_code=204)
 def delete_todo_handler(
     todo_id: int,
     session: Session = Depends(get_db),
