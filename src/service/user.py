@@ -1,4 +1,4 @@
-import bcrypt
+import bcrypt, random, time
 from datetime import datetime, timedelta
 from jose import jwt
 from config import Config
@@ -41,3 +41,15 @@ class UserService:
         )
         # expire check 생략
         return payload["sub"]
+    
+
+    @staticmethod
+    def create_otp() -> int:
+        return random.randint(1000, 9999)
+    
+
+    @staticmethod
+    def send_email_to_user(email: str) -> None:
+        # instead of sending email
+        time.sleep(10)
+        print(f"Sending email to {email}")
